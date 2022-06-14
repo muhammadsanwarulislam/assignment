@@ -21,11 +21,9 @@ class UserPageController extends Controller
 
     public function store(Request $request)
     {
-        $user = $this->followerRepo->create($request->except('user_id') + [
+        $user = $this->userPageRepo->create($request->except('user_id') + [
             'user_id'      =>  Auth::id()
         ]);
-        return $this->json('Request sent',[
-            'user_id'       =>  $user['user_id'],
-            ]);
+        return $this->json('Page create');
         }
 }

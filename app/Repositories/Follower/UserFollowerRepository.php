@@ -23,4 +23,8 @@ class UserFollowerRepository extends BaseRepository
         return $this->model()::where('user_id',auth()->user()->id)->get();
     }
 
+    public function checkFollowRequest($user_to)
+    {
+        return $this->model()::where('user_to',$user_to)->first();
+    }
 }

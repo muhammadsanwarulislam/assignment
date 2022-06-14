@@ -27,12 +27,20 @@ class UserFollowerController extends Controller
 
     public function sentFollowRequest(Request $request)
     {
-        $user = $this->followerRepo->create($request->except('user_id') + [
-                'user_id'      =>  Auth::id()
-            ]);
-        return $this->json('Request sent',[
-            'user_id'       =>  $user['user_id'],
-            ]);
+        if(Auth::id() == $request->user_to){
+            return $this->bad('You can not request yourself');
+        }
+        $checkFollowerRequestIsExist = $this->followerRepo->checkFollowRequest($request->user_to);
+        if($checkFollowerRequestIsExist)
+        {
+            return $this->bad('Already you are folloing the user');
+        }
+        else{
+            $user = $this->followerRepo->create($request->except('user_id') + [
+                    'user_id'      =>  Auth::id()
+                ]);
+            return $this->json('Request sent');
+        }
     }
 
 }
