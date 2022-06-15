@@ -28,20 +28,4 @@ Abstract class BaseRepository {
         return $this->model()::create($modelData);
     }
 
-    public function updateByID($id, array $modelData)
-    {
-        $model = $this->findOrFailByID($id);
-        return $model->update($modelData);
-    }
-
-    public function deletedByID($id)
-    {
-        $model = $this->findOrFailByID($id);
-        return $model->delete();
-    }
-    
-    public function getAllByUserID($field, $id)
-    {
-        return $this->model()::where($field, $id)->get();
-    }
 }
