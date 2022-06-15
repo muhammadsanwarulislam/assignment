@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserFollowsTable extends Migration
+class CreatePagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateUserFollowsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_follows', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('user_to')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->enum('status', ['Pending' ,'Approved', 'Declined'])->nullable();
+            $table->string('page_name');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateUserFollowsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_follows');
+        Schema::dropIfExists('pages');
     }
 }

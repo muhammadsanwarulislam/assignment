@@ -1,14 +1,14 @@
 <?php
 namespace Repository\Page;
 
-use App\Models\UserPage;
+use App\Models\Page;
 use Repository\BaseRepository;
 
-class UserPageRepository extends BaseRepository {
+class PageRepository extends BaseRepository {
 
     public function model()
     {
-        return UserPage::class;
+        return Page::class;
     }
     
 }

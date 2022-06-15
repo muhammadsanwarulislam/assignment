@@ -18,4 +18,9 @@ class UserRepository extends BaseRepository
         return $user->createToken('authToken')->accessToken;
     }
 
+    public function checkUserIsExist($follower_id)
+    {
+        return $this->model()::where('id',$follower_id)->first();
+    }
+
 }

@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\API\Backend\UserPage;
+namespace App\Http\Controllers\API\Backend\Page;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Repository\Page\UserPageRepository;
+use Repository\Page\PageRepository;
 use App\Http\Controllers\API\JsonResponseTrait;
 
-class UserPageController extends Controller
+class PageController extends Controller
 {
     use JsonResponseTrait;
 
     protected $userPageRepo;
 
-    function __construct(UserPageRepository $userPageRepo)
+    function __construct(PageRepository $userPageRepo)
     {
         $this->userPageRepo = $userPageRepo;
     }
