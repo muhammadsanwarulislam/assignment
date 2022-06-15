@@ -20,7 +20,7 @@ class FollowerController extends Controller
         $this->userRepo     = $userRepo;
     }
 
-    public function sentFollowRequest(Request $request)
+    public function store(Request $request)
     {
         //prevent logged in user request
         if(Auth::id() == $request->follower_id)
@@ -31,7 +31,7 @@ class FollowerController extends Controller
         //Check follower request id is exist in User table
         $checkUserIsExist = $this->userRepo->checkUserIsExist($request->follower_id);
         //Check follower resquest is exist in Follower table
-        $checkFollowerRequestIsExist = $this->followerRepo->checkFollowRequest($request->follower_id);
+        $checkFollowerRequestIsExist = $this->followerRepo->checkFollowRequest($request->follower_id, Auth::id());
 
         if($checkFollowerRequestIsExist)
         {
@@ -43,9 +43,7 @@ class FollowerController extends Controller
         }
         else
         {
-            $user = $this->followerRepo->create($request->except('user_id') + [
-                    'user_id'      =>  Auth::id()
-                ]);
+            $this->followerRepo->create($request->except('user_id') + ['user_id'  =>  Auth::id()]);
             return $this->json('Request sent');
         }
     }

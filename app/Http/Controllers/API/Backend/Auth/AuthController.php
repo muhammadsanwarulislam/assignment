@@ -30,9 +30,7 @@ class AuthController extends Controller
         $data['password'] = bcrypt($request->password);
         $user = $this->authRepo->create($data);
 
-        return $this->json('User registered successfully',[
-            'user' => $user
-        ]);
+        return $this->json('User registered successfully',['user' => $user ]);
     }
 
     public function login(Request $request)
@@ -42,7 +40,8 @@ class AuthController extends Controller
             'password'  => 'required'
         ]);
 
-        if (!auth()->attempt($data)) {
+        if (!auth()->attempt($data)) 
+        {
             return $this->bad('Invalid Credentials');
         }
     
@@ -57,7 +56,6 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
-
         return $this->json('User logged out.',['type' => 'logout_success']);
     }
 

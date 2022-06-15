@@ -10,5 +10,9 @@ class PageRepository extends BaseRepository {
     {
         return Page::class;
     }
-    
+
+    public function checkUserIsAssignThePage($user_id, $pageID)
+    {
+        return $this->model()::where('user_id', $user_id)->where('id', $pageID)->first();
+    }
 }

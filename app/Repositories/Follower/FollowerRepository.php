@@ -13,8 +13,8 @@ class FollowerRepository extends BaseRepository
         return Follower::class;
     }
 
-    public function checkFollowRequest($follower_id)
+    public function checkFollowRequest($follower_id, $user_id)
     {
-        return $this->model()::where('follower_id',$follower_id)->first();
+        return $this->model()::where('follower_id',$follower_id)->where('user_id', $user_id)->first();
     }
 }
